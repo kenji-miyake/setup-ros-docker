@@ -82,60 +82,7 @@ apt-get install --no-install-recommends --quiet --yes libopensplice69 || true
 python3 -m pip install --upgrade pip==20.*
 python3 -m pip install --upgrade pip
 
-pip3 install --upgrade \
-	argcomplete \
-	catkin_pkg \
-	colcon-bash==0.4.2 \
-	colcon-cd==0.1.1 \
-	colcon-cmake==0.2.22 \
-	colcon-common-extensions==0.2.1 \
-	colcon-core==0.5.9 \
-	colcon-coveragepy-result==0.0.8 \
-	colcon-defaults==0.2.5 \
-	colcon-lcov-result==0.4.0 \
-	colcon-library-path==0.2.1 \
-	colcon-metadata==0.2.4 \
-	colcon-mixin==0.1.8 \
-	colcon-notification==0.2.13 \
-	colcon-output==0.2.9 \
-	colcon-package-information==0.3.3 \
-	colcon-package-selection==0.2.6 \
-	colcon-parallel-executor==0.2.4 \
-	colcon-pkg-config==0.1.0 \
-	colcon-powershell==0.3.6 \
-	colcon-python-setup-py==0.2.5 \
-	colcon-recursive-crawl==0.2.1 \
-	colcon-ros==0.3.17 \
-	colcon-test-result==0.3.8 \
-	coverage \
-	cryptography \
-	empy \
-	"flake8<3.8" \
-	flake8-blind-except \
-	flake8-builtins \
-	flake8-class-newline \
-	flake8-comprehensions \
-	flake8-deprecated \
-	flake8-docstrings \
-	flake8-import-order \
-	flake8-quotes \
-	ifcfg \
-	importlib-metadata==2.* \
-	lark-parser \
-	mock \
-	mypy \
-	nose \
-	pep8 \
-	pydocstyle \
-	pyparsing \
-	pytest \
-	pytest-cov \
-	pytest-mock \
-	pytest-repeat \
-	pytest-rerunfailures \
-	pytest-runner \
-	setuptools \
-	wheel
+pip3 install --upgrade --force-reinstall -r requirements.txt
 
 rosdep init
 
