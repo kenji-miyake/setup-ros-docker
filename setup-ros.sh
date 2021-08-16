@@ -82,7 +82,7 @@ apt-get install --no-install-recommends --quiet --yes libopensplice69 || true
 python3 -m pip install --upgrade pip==20.*
 python3 -m pip install --upgrade pip
 
-pip3 install --upgrade --force-reinstall -r requirements.txt
+pip3 install --upgrade -r requirements.txt
 
 rosdep init
 
