@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
           base_image_name: [ubuntu]
-          base_image_tag: [bionic, focal, xenial]
+          base_image_tag: [focal]
     name: "${{ matrix.base_image_name }}-${{ matrix.base_image_tag }}"
     # always use latest linux worker, as it should not have any impact
     # when it comes to building docker images.
@@ -33,82 +33,15 @@ jobs:
             ROS_DISTRO=none
             ROS_APT_REPO_URLS=http://packages.ros.org/ros,http://packages.ros.org/ros2
         imageName: "setup-ros-docker-${{ matrix.base_image_name }}-${{ matrix.base_image_tag }}"
-    # Publish the image to DockerHub too
-    - run: docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-    - run: docker images
-    - run: "docker tag docker.pkg.github.com/ros-tooling/setup-ros-docker/setup-ros-docker-${{ matrix.base_image_name }}-${{ matrix.base_image_tag }}:master rostooling/setup-ros-docker:${{ matrix.base_image_name }}-${{ matrix.base_image_tag }}-latest"
-      if: github.event_name != 'pull_request'
-    - run: "docker push rostooling/setup-ros-docker:${{ matrix.base_image_name }}-${{ matrix.base_image_tag }}-latest"
-      if: github.event_name != 'pull_request'
 
   build_ubuntu_docker_image_ros:
     strategy:
       fail-fast: false
       matrix:
           base_image_name: [ubuntu]
-          ros_distro: [kinetic, melodic, noetic, dashing, foxy, galactic, rolling]
+          ros_distro: [galactic]
           ros_variant: [desktop, ros-base]
           include:
-
-          # Kinetic Kame (May 2016 - May 2021)
-          - ros_distro: kinetic
-            base_image_tag: xenial
-            ros_variant: desktop
-            ros_repo_url: http://packages.ros.org/ros
-            output_image_tag: ubuntu-xenial-ros-kinetic-desktop
-          - ros_distro: kinetic
-            base_image_tag: xenial
-            ros_variant: ros-base
-            ros_repo_url: http://packages.ros.org/ros
-            output_image_tag: ubuntu-xenial-ros-kinetic-ros-base
-
-          # Melodic Morenia (May 2018 - May 2023)
-          - ros_distro: melodic
-            base_image_tag: bionic
-            ros_variant: desktop
-            ros_repo_url: http://packages.ros.org/ros
-            output_image_tag: ubuntu-bionic-ros-melodic-desktop
-          - ros_distro: melodic
-            base_image_tag: bionic
-            ros_variant: ros-base
-            ros_repo_url: http://packages.ros.org/ros
-            output_image_tag: ubuntu-bionic-ros-melodic-ros-base
-
-          # Noetic Ninjemys (May 2020 - May 2025)
-          - ros_distro: noetic
-            base_image_tag: focal
-            ros_variant: desktop
-            ros_repo_url: http://packages.ros.org/ros
-            output_image_tag: ubuntu-focal-ros-noetic-desktop
-          - ros_distro: noetic
-            base_image_tag: focal
-            ros_variant: ros-base
-            ros_repo_url: http://packages.ros.org/ros
-            output_image_tag: ubuntu-focal-ros-noetic-ros-base
-
-          # Dashing Diademata (May 2019 - May 2021)
-          - ros_distro: dashing
-            base_image_tag: bionic
-            ros_variant: desktop
-            ros_repo_url: http://packages.ros.org/ros2
-            output_image_tag: ubuntu-bionic-ros-dashing-desktop
-          - ros_distro: dashing
-            base_image_tag: bionic
-            ros_variant: ros-base
-            ros_repo_url: http://packages.ros.org/ros2
-            output_image_tag: ubuntu-bionic-ros-dashing-ros-base
-
-          # Foxy Fitzroy (May 2020 - May 2023)
-          - ros_distro: foxy
-            base_image_tag: focal
-            ros_variant: desktop
-            ros_repo_url: http://packages.ros.org/ros2
-            output_image_tag: ubuntu-focal-ros-foxy-desktop
-          - ros_distro: foxy
-            base_image_tag: focal
-            ros_variant: ros-base
-            ros_repo_url: http://packages.ros.org/ros2
-            output_image_tag: ubuntu-focal-ros-foxy-ros-base
 
           # Galactic Geochelone (May 2021 - November 2022)
           - ros_distro: galactic
@@ -121,18 +54,6 @@ jobs:
             ros_variant: ros-base
             ros_repo_url: http://packages.ros.org/ros2
             output_image_tag: ubuntu-focal-ros-galactic-ros-base
-
-          # Rolling Ridley (June 2020 - Ongoing)
-          - ros_distro: rolling
-            base_image_tag: focal
-            ros_variant: desktop
-            ros_repo_url: http://packages.ros.org/ros2
-            output_image_tag: ubuntu-focal-ros-rolling-desktop
-          - ros_distro: rolling
-            base_image_tag: focal
-            ros_variant: ros-base
-            ros_repo_url: http://packages.ros.org/ros2
-            output_image_tag: ubuntu-focal-ros-rolling-ros-base
 
     name: "${{ matrix.output_image_tag }}"
     # always use latest linux worker, as it should not have any impact
@@ -153,10 +74,3 @@ jobs:
             ROS_DISTRO=${{ matrix.ros_distro }}
             ROS_APT_REPO_URLS=${{ matrix.ros_repo_url }}
         imageName: "setup-ros-docker-${{ matrix.output_image_tag }}"
-    # Publish the image to DockerHub too
-    - run: docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-    - run: docker images
-    - run: "docker tag docker.pkg.github.com/ros-tooling/setup-ros-docker/setup-ros-docker-${{ matrix.output_image_tag }}:master rostooling/setup-ros-docker:${{ matrix.output_image_tag }}-latest"
-      if: github.event_name != 'pull_request'
-    - run: "docker push rostooling/setup-ros-docker:${{ matrix.output_image_tag }}-latest"
-      if: github.event_name != 'pull_request'
