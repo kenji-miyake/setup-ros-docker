@@ -14,7 +14,7 @@ colcon-mixin==0.1.8
 colcon-notification==0.2.13
 colcon-output==0.2.9
 colcon-package-information==0.3.3
-colcon-package-selection==0.2.6
+colcon-package-selection==0.2.10
 colcon-parallel-executor==0.2.4
 colcon-pkg-config==0.1.0
 colcon-powershell==0.3.6
