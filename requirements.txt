@@ -4,7 +4,7 @@ colcon-bash==0.4.2
 colcon-cd==0.1.1
 colcon-cmake==0.2.22
 colcon-common-extensions==0.2.1
-colcon-core==0.5.9
+colcon-core==0.6.1
 colcon-coveragepy-result==0.0.8
 colcon-defaults==0.2.5
 colcon-lcov-result==0.4.0
