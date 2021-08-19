@@ -18,7 +18,7 @@ colcon-package-selection==0.2.6
 colcon-parallel-executor==0.2.4
 colcon-pkg-config==0.1.0
 colcon-powershell==0.3.6
-colcon-python-setup-py==0.2.5
+colcon-python-setup-py==0.2.7
 colcon-recursive-crawl==0.2.1
 colcon-ros==0.3.17
 colcon-test-result==0.3.8
