@@ -2,7 +2,7 @@ argcomplete
 catkin_pkg
 colcon-bash==0.4.2
 colcon-cd==0.1.1
-colcon-cmake==0.2.22
+colcon-cmake==0.2.27
 colcon-common-extensions==0.2.1
 colcon-core==0.5.9
 colcon-coveragepy-result==0.0.8
